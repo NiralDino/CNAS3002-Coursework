@@ -4,7 +4,7 @@ import os
 sys.path.insert(0, os.path.abspath("."))
 
 #This is just a test program for Jenkins
-from app import app
+from flaskcourserwork_app import app
 
 def test_calculation_success():
     client = app.test_client()
