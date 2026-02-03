@@ -1,3 +1,8 @@
+#This will add the root of the repository to the Python path
+import sys
+import os
+sys.path.insert(0, os.path.abspath("."))
+
 #This is just a test program for Jenkins
 from app import app
 
