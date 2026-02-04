@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "flaskcoursework_app"
-        CONTAINER_NAME = "Flaskcoursework_container"
+        CONTAINER_NAME = "flaskcoursework_container"
     }
 
     options {
@@ -11,6 +11,7 @@ pipeline {
     }
 
     stages {
+        
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -18,30 +19,30 @@ pipeline {
                     url: 'https://github.com/NiralDino/CNAS3002-Coursework.git'
             }
         }
-    }
     
         stage('Building Image') {
             steps {
-                sh "docker build -t flaskcoursework_app:12"
+                sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
             }
         }
 
         stage('Flask App Test') {
             steps {
-                sh "docker run --rm flaskcoursework_app:12 pytest"
+                sh "docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} pytest"
             }
         }
 
         stage('Deploying Applicatiom') {
             steps {
                 sh """
-                docker stop flaskcoursework_container || true
-                docker rm flaskcoursework_container || true
+                docker stop ${CONTAINER_NAME} || true
+                docker rm ${CONTAINER_NAME} || true
 
-                docker rum -d -p 5050:5050 --name flaskcoursework_container flaskcoursework_app:12
+                docker run -d -p 5050:5050 --name ${CONTAINER_NAME} ${IMAGE_NAME}:${BUILD_NUMBER}
                 """
     }
         }
+    }
         
     post {
         success {
