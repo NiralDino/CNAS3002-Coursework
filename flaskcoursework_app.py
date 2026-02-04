@@ -60,6 +60,7 @@ def calculation():
             "Error": str(e)
         }), 400
 
-#This makes sure that Flask works when this file is compiled
+#This makes sure that Flask works when this file is compiled, the host and port will allow external access and prevents the server from starting during the tests
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5050))
+    app.run(host="0.0.0.0", port=port, debug=True)
