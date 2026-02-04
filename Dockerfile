@@ -23,6 +23,9 @@ WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 COPY --from=builder /app /app
 
+#I'm installing pytest in the runtime
+RUN pip install --no-cache-dir pytest
+
 # This port will be for Docker (configurable via env)
 ENV PORT=5050
 EXPOSE ${PORT}
