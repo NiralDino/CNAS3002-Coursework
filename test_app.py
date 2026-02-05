@@ -35,7 +35,7 @@ class TestCalculationEndpoint(unittest.TestCase):
         self.assertEqual(data["Median"], 3)
         self.assertEqual(data["Minimum"], 1)
         self.assertEqual(data["Maximum"], 5)
-        self.assertAlmostEqual(data["StandardDeviation"], 1.5811, places=4)
+        self.assertAlmostEqual(data["Standard Deviation"], 1.5811, places=4)
         
     def test_calculation_invalid_input(self):
         """
