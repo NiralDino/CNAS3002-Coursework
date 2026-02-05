@@ -31,10 +31,11 @@ class TestCalculationEndpoint(unittest.TestCase):
 
         #If the results for the list of numbers isn't shown as below, the test would fail
         data = response.get_json()
-        self.assertEqual(data["Mean"], 5)
+        self.assertEqual(data["Mean"], 3)
         self.assertEqual(data["Median"], 3)
         self.assertEqual(data["Minimum"], 1)
         self.assertEqual(data["Maximum"], 5)
+        self.assertAlmostEqual(data["StandardDeviation"], 1.5811, places=4)
         
     def test_calculation_invalid_input(self):
         """
