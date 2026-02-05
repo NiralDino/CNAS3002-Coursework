@@ -28,7 +28,7 @@ pipeline {
 
         stage('Flask App Test') {
             steps {
-                sh "docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} pytest"
+                sh "docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} python -m pytest"
             }
         }
 
