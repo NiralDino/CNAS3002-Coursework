@@ -7,6 +7,8 @@ pipeline {
                 sh 'python3 -m venv venv'
 
                 sh '''
+                    #!/bin/bash
+                    python3 -m venv venv
                     source venv/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
@@ -17,6 +19,7 @@ pipeline {
         stage('Run unit tests'){
             steps {
                 sh '''
+                    #!/bin/bash
                     source venv/bin/activate
                     python3 -m unittest discover -s tests -v
                 '''
