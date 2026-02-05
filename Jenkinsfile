@@ -7,22 +7,16 @@ pipeline {
                 sh 'python3 -m venv venv'
 
                 sh '''
-                    #!/bin/bash
                     python3 -m venv venv
-                    source venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                    ./venv/bin/pip install --upgrade pip
+                    ./venv/bin/pip install -r requirements.txt
                 '''
             }
         }
 
         stage('Run unit tests'){
             steps {
-                sh '''
-                    #!/bin/bash
-                    source venv/bin/activate
-                    python3 -m unittest discover -s tests -v
-                '''
+                sh './venv/bin/python3 -m unittest discover -s tests -v'
             }
         }
     }
