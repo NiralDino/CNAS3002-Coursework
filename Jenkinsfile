@@ -4,13 +4,22 @@ pipeline {
     stages {
         stage('Install dependancies'){
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m venv venv'
+
+                sh '''
+                    source venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run unit tests'){
             steps {
-                sh 'python3 -m unittest discover tests'
+                sh '''
+                    source venv/bin/activate
+                    python3 -m unittest discover -s tests -v
+                '''
             }
         }
     }
